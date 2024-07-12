@@ -9,6 +9,6 @@ const songsSchema = new mongoose.Schema({
   genre: String,
 });
 
-const Song = mongoose.model("Song", songsSchema);
+const Songs = mongoose.model("Song", songsSchema);
 
-export default Song;
+export default Songs;
