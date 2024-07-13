@@ -18,7 +18,7 @@ router.post("/course/add", validateCourseData, addCourse);
 // ? get all course
 router.get("/course/list", listCourse);
 
-// ? get all course by id
+// ? get course by id
 router.get("/course/list/:id", validMongoID, findID, getCourse);
 
 // ? delete by id
