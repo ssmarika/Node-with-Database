@@ -74,8 +74,10 @@ export const sortbyprice = async (req, res) => {
 };
 
 export const updatebyid = async (req, res) => {
-  const id = req.params.id;
+  const courseId = req.params.id;
   const updatedInfo = req.body;
-  await Course.updateOne({ _id: id }, { $set: { updatedInfo } });
-  return res.status(201).send({ message: "Successfully updated" });
+  await Course.updateOne({ _id: courseId }, { $set: { ...updatedInfo } });
+  return res
+    .status(201)
+    .send({ message: "Successfully updated the course by id" });
 };
