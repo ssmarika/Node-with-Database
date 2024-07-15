@@ -11,7 +11,7 @@ export const validateFoodData = async (req, res, next) => {
     const validateData = await foodValidationSchema.validate(req.body);
     req.body = validateData;
   } catch (error) {
-    return res.status(404).send({ message: "Data structure is not valid" });
+    return res.status(404).send({ message: error.message });
   }
 
   next();

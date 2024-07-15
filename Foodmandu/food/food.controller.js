@@ -29,6 +29,12 @@ router.delete("/delete/:id", validateMongoId, findItem, deleteFoodbyId);
 router.get("/sort", listbyPrice);
 
 // ? update item by id
-router.put("/update/:id", validateMongoId, findItem, updateItem);
+router.put(
+  "/update/:id",
+  validateMongoId,
+  findItem,
+  validateFoodData,
+  updateItem
+);
 
 export default router;
