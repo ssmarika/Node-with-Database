@@ -7,7 +7,6 @@ export const validateFoodData = async (req, res, next) => {
     name: Yup.string().required().trim().max(55),
     price: Yup.number().required().min(0),
   });
-
   try {
     const validateData = await foodValidationSchema.validate(req.body);
     req.body = validateData;
@@ -35,7 +34,7 @@ export const validateMongoId = (req, res, next) => {
   const isValid = mongoose.isValidObjectId(id);
 
   if (!isValid) {
-    return res.status(404).send({ message: "Invalis MongoID" });
+    return res.status(404).send({ message: "Invalid MongoID" });
   }
 
   next();
@@ -57,4 +56,29 @@ export const listFoodbyId = async (req, res) => {
   return res
     .status(201)
     .send({ message: "Food item found", foodList: req.foodItem });
+};
+
+export const deleteFoodbyId = async (req, res) => {
+  await Food.findByIdAndDelete(req.params.id);
+  return res.status(200).send({ messgae: "Item deleted successfully" });
+};
+
+export const listbyPrice = async (req, res) => {
+  const foodByPrice = await Food.aggregate([
+    { $match: {} },
+    { $sort: { price: -1 } },
+  ]);
+  return res
+    .status(201)
+    .send({ message: "Items sorted", sortedList: foodByPrice });
+};
+
+export const updateItem = async (req, res) => {
+  const data = req.body;
+  const id = req.params.id;
+
+  await Food.updateOne({ _id: id }, { $set: { ...data } });
+  return res
+    .status(201)
+    .send({ message: "Food item updated successfully", updatedItem: data });
 };
