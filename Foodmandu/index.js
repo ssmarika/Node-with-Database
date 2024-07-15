@@ -2,7 +2,7 @@ import express from "express";
 import connectDB from "./connect.db.js";
 import customerRoutes from "./customer/customer.controller.js";
 import restaurantRoutes from "./restaurant/restaurant.controller.js";
-
+import foodRoutes from "./food/food.controller.js";
 const app = express();
 
 // to make app understand json
@@ -13,6 +13,9 @@ connectDB();
 
 // register customer
 app.use(customerRoutes);
+
+// register food
+app.use("/food", foodRoutes);
 
 // register restaurant
 app.use("/res", restaurantRoutes);
