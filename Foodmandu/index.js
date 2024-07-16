@@ -3,6 +3,8 @@ import connectDB from "./connect.db.js";
 import customerRoutes from "./customer/customer.controller.js";
 import restaurantRoutes from "./restaurant/restaurant.controller.js";
 import foodRoutes from "./food/food.controller.js";
+import orderRoutes from "./order/order.controller.js";
+
 const app = express();
 
 // to make app understand json
@@ -20,6 +22,9 @@ app.use("/food", foodRoutes);
 // register restaurant
 app.use("/res", restaurantRoutes);
 //this helps to reduce the /res in the api made in controller
+
+// register order
+app.use(orderRoutes);
 
 // network port and server
 const PORT = 8080;
