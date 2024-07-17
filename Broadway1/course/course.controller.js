@@ -45,6 +45,9 @@ router.post(
       return res.status(404).send({ message: "Unauthorized" });
     }
 
+    //we need to add the addedby field which is actually the admins is so for that purpose we make a
+    // variable that store the admins
+
     req.loggedInUserId = admin._id;
 
     // call next function
@@ -55,6 +58,7 @@ router.post(
     //extract course from the req. body
     const newCourse = req.body;
     newCourse.addedBy = req.loggedInUserId;
+
     // add course
     await Course.create(newCourse);
 
